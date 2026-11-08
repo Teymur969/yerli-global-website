@@ -262,6 +262,7 @@
   const items = $$('.svc__item');
   const arms = { label: $('.svc__arm--l'), production: $('.svc__arm--r') };
   const now = $('.svc__now');
+  $('.svc__total').textContent = items.length; // counter total follows the list
   const svcStar = $('.svc__star svg');
   let activeStep = 0;
   const setActive = i => {
