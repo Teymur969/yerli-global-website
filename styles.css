@@ -266,20 +266,23 @@ section { position: relative; }
    3a. WORKED WITH (logo strip)
    Every logo is drawn at the same height (--logo-strip-h); --s on the <li>
    is an optical nudge for marks that read bigger or smaller than their box.
-   Desktop: one row, spaced edge to edge. Phones: a centred, wrapping grid.
+   Wide screens: one row, edge to edge; logo height and gaps scale with the
+   section width (cqi) so nine logos never wrap. Narrower: a 3-column grid.
    ========================================================= */
 .work { padding: var(--section-y) var(--pad-x); container-type: inline-size; }
 .work__title { font-family: var(--display); font-weight: 900; font-size: min(var(--x), 100cqi / 8.4); line-height: .9; }
 .logos {
-  --logo-strip-h: clamp(26px, 2.5vw, 42px);
+  --logo-strip-h: 26px;
   margin-top: clamp(40px, 5vw, 72px); border-top: 1px solid var(--umbra); padding-top: clamp(40px, 5vw, 80px);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: clamp(28px, 3vw, 48px) clamp(28px, 3.4vw, 56px);
+  display: grid; grid-template-columns: repeat(3, 1fr); align-items: center;
+  gap: clamp(28px, 4vw, 48px) clamp(16px, 4vw, 48px);
 }
-.logo { flex: none; display: grid; place-items: center; height: calc(var(--logo-strip-h) * 1.5); }
-.logo img { display: block; height: calc(var(--logo-strip-h) * var(--s, 1)); width: auto; max-width: none; }
-@media (max-width: 760px) {
-  .logos { --logo-strip-h: 26px; justify-content: center; gap: 28px 36px; }
+.logo { display: grid; place-items: center; height: calc(var(--logo-strip-h) * 1.5); }
+.logo img { display: block; height: calc(var(--logo-strip-h) * var(--s, 1)); width: auto; max-width: 100%; object-fit: contain; }
+@media (min-width: 1100px) {
+  .logos { --logo-strip-h: min(42px, 2.6cqi); display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 0 2cqi; }
+  .logo { flex: none; }
+  .logo img { max-width: none; }
 }
 
 /* =========================================================
