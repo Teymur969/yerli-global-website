@@ -501,10 +501,19 @@ section { position: relative; }
 .foot__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--umbra); padding-top: 24px; }
 .foot__logo { color: var(--smoke); padding: calc(var(--vlogo-h) * .21) calc(var(--vlogo-h) * .21) calc(var(--vlogo-h) * .21) 0; }
 .foot__logo svg { height: var(--vlogo-h); width: auto; }
-.foot__links { display: flex; gap: 24px; font-weight: 500; }
+.foot__links { display: flex; flex-wrap: wrap; gap: 8px 24px; font-weight: 500; }
 .foot__links a { text-decoration: none; }
 .foot__links a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .foot__meta { font-size: 14px; color: var(--silver); }
+
+/* ---------- Privacy page ---------- */
+.legal__back { font-size: 16px; font-weight: 500; text-decoration: none; padding: 8px 0; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .25s var(--ease); }
+.legal__back:hover { background-size: 100% 2px; }
+.legal { min-height: 70svh; padding: calc(var(--nav-h) + var(--section-y) / 2) var(--pad-x) var(--section-y); container-type: inline-size; }
+.legal__title { font-family: var(--display); font-weight: 900; font-size: min(var(--x), 100cqi / 5); line-height: .9; }
+.legal__body { margin-top: clamp(32px, 4vw, 56px); max-width: 34em; font-size: var(--x3); line-height: 1.4; font-weight: 500; display: grid; gap: 1em; }
+.legal__body a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.legal__body a:hover { color: var(--red); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
