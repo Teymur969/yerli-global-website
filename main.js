@@ -291,6 +291,12 @@
       .fromTo($('.svc__desc', it), { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.3);
   });
 
+  /* 3a. Worked With: the logos rise in once, left to right */
+  if ($('.logos .logo')) {
+    gsap.from('.logos .logo', { y: 24, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06,
+      scrollTrigger: { trigger: '.logos', start: 'top 85%', once: true } });
+  }
+
   /* 4. Projects: as the next card slides over, the one underneath shrinks back and dims */
   const cards = liveCards;
   cards.forEach((it, i) => {

@@ -263,6 +263,26 @@ section { position: relative; }
 }
 
 /* =========================================================
+   3a. WORKED WITH (logo strip)
+   Every logo is drawn at the same height (--logo-strip-h); --s on the <li>
+   is an optical nudge for marks that read bigger or smaller than their box.
+   Desktop: one row, spaced edge to edge. Phones: a centred, wrapping grid.
+   ========================================================= */
+.work { padding: var(--section-y) var(--pad-x); container-type: inline-size; }
+.work__title { font-family: var(--display); font-weight: 900; font-size: min(var(--x), 100cqi / 8.4); line-height: .9; }
+.logos {
+  --logo-strip-h: clamp(26px, 2.5vw, 42px);
+  margin-top: clamp(40px, 5vw, 72px); border-top: 1px solid var(--umbra); padding-top: clamp(40px, 5vw, 80px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: clamp(28px, 3vw, 48px) clamp(28px, 3.4vw, 56px);
+}
+.logo { flex: none; display: grid; place-items: center; height: calc(var(--logo-strip-h) * 1.5); }
+.logo img { display: block; height: calc(var(--logo-strip-h) * var(--s, 1)); width: auto; max-width: none; }
+@media (max-width: 760px) {
+  .logos { --logo-strip-h: 26px; justify-content: center; gap: 28px 36px; }
+}
+
+/* =========================================================
    3b. PROJECTS (stacked cards)
    Cards stick under the nav and pile up as you scroll (pure CSS).
    With .motion, the card underneath shrinks back and dims.
@@ -506,3 +526,7 @@ section { position: relative; }
 .proj__item:has(> a.proj[href="#"]) { display: none; }
 body:not(:has(.proj:not([href="#"]))) .projects,
 body:not(:has(.proj:not([href="#"]))) .nav__links li:has(> a[href="#projects"]) { display: none; }
+/* Worked With: each logo removes itself if its file is missing (onerror in the HTML);
+   with no logos left, the section and its nav link stay hidden. */
+.work:not(:has(.logo)),
+body:not(:has(.work .logo)) .nav__links li:has(> a[href="#work"]) { display: none; }

@@ -42,7 +42,7 @@
     <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="nav-links"><span class="nav__toggle-open">menu</span><span class="nav__toggle-close">close</span></button>
     <ul class="nav__links" id="nav-links">
       <li><a href="#what">services</a></li>
-      <li><a href="#projects">projects</a></li>
+      <li><a href="#work">work</a></li>
       <li><a href="#family">family</a></li>
       <li><a href="#about">about</a></li>
       <li><a href="#contact">contact</a></li>
@@ -112,6 +112,26 @@
       <p class="svc__count" aria-hidden="true"><span class="svc__now">01</span> / 6</p>
       <a class="svc__cta" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
     </div>
+  </section>
+
+  <!-- 3a. WORKED WITH: one strip of client and partner logos (white, single colour, in /logos).
+       To add one: drop logos/<slug>.svg (or .png, at least 400px tall, trimmed) and add an <li class="logo">.
+       width/height are the file's own pixel or viewBox size, so the layout does not jump while it loads.
+       --s nudges a logo's optical size (1 = the strip height). A logo whose file is missing removes itself;
+       if none are left, the section and its nav link stay hidden. -->
+  <section class="work" id="work" data-theme="black" aria-labelledby="work-h">
+    <h2 id="work-h" class="work__title">WORKED WITH</h2>
+    <ul class="logos">
+      <li class="logo" style="--s:1.1"><img src="logos/coca-cola.png" alt="Coca-Cola" width="1221" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:1.15"><img src="logos/cop29.png" alt="COP29" width="948" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:.8"><img src="logos/colgate.svg" alt="Colgate" width="206" height="42" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:.95"><img src="logos/palmolive.svg" alt="Palmolive" width="187" height="59" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:.78"><img src="logos/believe.png" alt="Believe" width="1794" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:1.5"><img src="logos/jara-music.png" alt="Jara Music" width="574" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:1"><img src="logos/rootless-records.svg" alt="Rootless Records" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:.95"><img src="logos/nanta.png" alt="Nanta AI" width="1485" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+      <li class="logo" style="--s:1"><img src="logos/dead-simple.svg" alt="Dead Simple" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
+    </ul>
   </section>
 
   <!-- 3b. PROJECTS: stacked cards. Each card links out to the work (YouTube, Spotify, a case page later).
