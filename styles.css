@@ -42,7 +42,7 @@
   --section-y: clamp(80px, 11vw, 176px);
   --gap: clamp(24px, 3vw, 48px);
 
-  /* Logo sizes and clear space (see README) */
+  /* Logo sizes and clear space (see the Yerli brandbook) */
   --logo-h: 28px;
   --logo-clear: calc(var(--logo-h) * 0.82);
   --vlogo-h: 72px;
