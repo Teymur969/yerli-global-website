@@ -1,0 +1,42 @@
+# Yerli Global, Apache config. Ignored by hosts that do not run Apache
+# (Netlify and Cloudflare Pages read _headers instead).
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1. www.yerli.global -> https://yerli.global (one hop, keeps the path)
+  RewriteCond %{HTTP_HOST} ^www\.yerli\.global$ [NC]
+  RewriteRule ^ https://yerli.global%{REQUEST_URI} [R=301,L]
+
+  # 2. Force HTTPS. The X-Forwarded-Proto check stops a redirect loop
+  #    when the host terminates TLS at a proxy in front of Apache.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 3. Clean URL: /privacy serves privacy.html (matches its canonical link)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^([a-z-]+)/?$ $1.html [L]
+</IfModule>
+
+# Same headers as _headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+</IfModule>
