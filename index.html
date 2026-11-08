@@ -128,9 +128,11 @@
        --s nudges a logo's optical size (1 = the strip height). A logo whose file is missing removes itself;
        if none are left, the section and its nav link stay hidden.
        Slugs, in order: coca-cola, cop29, colgate, palmolive, believe, zhara-music, rootless-records, dead-simple, game-summit, montage, cynetia, estetage, boomtown.
-       Use each brand's lockup as supplied: recolour to white and trim empty space only, never crop sub-lines. -->
+       Use each brand's lockup as supplied: recolour to white and trim empty space only, never crop sub-lines.
+       With JS and motion allowed, main.js duplicates the list and the strip rolls on a loop; otherwise it shows as a static grid. -->
   <section class="work" id="work" data-theme="black" aria-labelledby="work-h">
     <h2 id="work-h" class="work__title">WORKED WITH</h2>
+    <div class="marquee"><div class="marquee__view"><div class="marquee__track">
     <ul class="logos">
       <li class="logo" style="--s:1.1"><img src="logos/coca-cola.png" alt="Coca-Cola" width="1221" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
       <li class="logo" style="--s:1.15"><img src="logos/cop29.png" alt="COP29" width="948" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
@@ -146,6 +148,7 @@
       <li class="logo" style="--s:1.55"><img src="logos/estetage.png" alt="Estetage" width="582" height="185" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
       <li class="logo" style="--s:1.05"><img src="logos/boomtown.png" alt="Boomtown Productions" width="716" height="400" loading="lazy" decoding="async" onerror="this.parentNode.remove()"></li>
     </ul>
+    </div></div></div>
   </section>
 
   <!-- 3b. PROJECTS: stacked cards. Each card links out to the work (YouTube, Spotify, a case page later).

@@ -219,6 +219,24 @@
   }
 
   /* ---------- Scroll scenes ---------- */
+  /* ---------- Worked With: rolling logo strip ----------
+     Duplicates the list (hidden from screen readers) and loops it; ~45px per second.
+     Reduced motion keeps the static grid. */
+  const marquee = $('.marquee');
+  if (marquee && !reduced && $('.logos .logo', marquee)) {
+    const track = $('.marquee__track', marquee);
+    const list = $('.logos', track);
+    const copy = list.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    $$('img', copy).forEach(img => { img.alt = ''; });
+    track.append(copy);
+    marquee.classList.add('is-rolling');
+    const setSpeed = () => marquee.style.setProperty('--roll-time', `${Math.max(20, list.offsetWidth / 45)}s`);
+    setSpeed();
+    addEventListener('load', setSpeed);
+    addEventListener('resize', setSpeed);
+  }
+
   if (reduced || !window.gsap || !window.ScrollTrigger) return;
   const { gsap, ScrollTrigger } = window;
   gsap.registerPlugin(ScrollTrigger);
@@ -293,12 +311,6 @@
       .fromTo($('.svc__word', it), { yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: 'power3.out' }, i - 0.5)
       .fromTo($('.svc__desc', it), { opacity: 0 }, { opacity: 1, duration: 0.3 }, i - 0.3);
   });
-
-  /* 3a. Worked With: the logos rise in once, left to right */
-  if ($('.logos .logo')) {
-    gsap.from('.logos .logo', { y: 24, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06,
-      scrollTrigger: { trigger: '.logos', start: 'top 85%', once: true } });
-  }
 
   /* 4. Projects: as the next card slides over, the one underneath shrinks back and dims */
   const cards = liveCards;
