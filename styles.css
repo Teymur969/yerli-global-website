@@ -267,7 +267,7 @@ section { position: relative; }
    Every logo is drawn at the same height (--logo-strip-h); --s on the <li>
    is an optical nudge for marks that read bigger or smaller than their box.
    Wide screens: one row, edge to edge; logo height and gaps scale with the
-   section width (cqi) so nine logos never wrap. Narrower: a 3-column grid.
+   section width (cqi); up to 7 per row, rows centred. Narrower: a 3-column grid.
    ========================================================= */
 .work { padding: var(--section-y) var(--pad-x); container-type: inline-size; }
 .work__title { font-family: var(--display); font-weight: 900; font-size: min(var(--x), 100cqi / 8.4); line-height: .9; }
@@ -280,9 +280,9 @@ section { position: relative; }
 .logo { display: grid; place-items: center; height: calc(var(--logo-strip-h) * 1.5); }
 .logo img { display: block; height: calc(var(--logo-strip-h) * var(--s, 1)); width: auto; max-width: 100%; object-fit: contain; }
 @media (min-width: 1100px) {
-  .logos { --logo-strip-h: min(42px, 2.6cqi); display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 0 2cqi; }
-  .logo { flex: none; }
-  .logo img { max-width: none; }
+  /* Two centred rows of up to 7 (13 logos: 7 + 6). Each logo gets an equal slot. */
+  .logos { --logo-strip-h: min(40px, 2.6cqi); display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(40px, 4cqi, 64px) 2cqi; }
+  .logo { flex: 0 0 calc((100% - 6 * 2cqi) / 7); }
 }
 
 /* =========================================================
@@ -500,7 +500,13 @@ section { position: relative; }
 
 /* ---------- Footer ---------- */
 .foot { padding: 0 var(--pad-x) 32px; overflow: hidden; }
-.foot__strip { font-size: clamp(28px, 4vw, 56px); font-weight: 700; letter-spacing: -0.02em; color: var(--umbra); white-space: nowrap; line-height: 1; padding: 28px 0 32px; }
+/* Footer strip: a seamless loop. Two identical groups; the track moves left by
+   exactly one group (-50%), then restarts, so the seam never shows. Full bleed. */
+.foot__strip { margin-inline: calc(var(--pad-x) * -1); overflow: hidden; font-size: clamp(28px, 4vw, 56px); font-weight: 700; letter-spacing: -0.02em; color: var(--umbra); white-space: nowrap; line-height: 1; padding: 28px 0 32px; }
+.foot__track { display: flex; width: max-content; animation: foot-roll 40s linear infinite; }
+.foot__group { display: flex; flex: none; }
+.foot__group span { padding-right: .35em; }
+@keyframes foot-roll { to { transform: translateX(-50%); } }
 .foot__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--umbra); padding-top: 24px; }
 .foot__logo { color: var(--smoke); padding: calc(var(--vlogo-h) * .21) calc(var(--vlogo-h) * .21) calc(var(--vlogo-h) * .21) 0; }
 .foot__logo svg { height: var(--vlogo-h); width: auto; }
@@ -523,6 +529,7 @@ section { position: relative; }
   .js .hero-in, .js.ready .hero-in { transform: none; transition: none; }
   .js .hero__sub, .js.ready .hero__sub { opacity: 1; transition: none; }
   .js.ready .poster .ystar { animation: none; }
+  .foot__track { animation: none; }
   .proj__item { position: static; height: auto; min-height: 0; min-width: 0; aspect-ratio: 21 / 10; }
   * { transition-duration: 0s !important; }
 }
