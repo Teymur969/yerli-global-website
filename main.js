@@ -102,6 +102,7 @@
     am: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 17.5V6l10-2v11.5"/><circle cx="6.5" cy="17.5" r="2.5" fill="currentColor"/><circle cx="16.5" cy="15.5" r="2.5" fill="currentColor"/></svg>'
   };
   const LINKS = [['ig', 'Instagram'], ['sp', 'Spotify'], ['am', 'Apple Music']];
+  const PLATFORM = { ig: 'instagram', sp: 'spotify', am: 'apple' }; // Umami event data (data-umami-event-platform)
 
   const card = $('.card');
   const cardLinks = $('.card__links', card);
@@ -117,6 +118,7 @@
       const a = document.createElement('a');
       a.href = p.dataset[k]; a.target = '_blank'; a.rel = 'noopener';
       a.setAttribute('aria-label', `${name} on ${label}`);
+      a.dataset.umamiEvent = 'artist-link'; a.dataset.umamiEventName = name; a.dataset.umamiEventPlatform = PLATFORM[k];
       a.innerHTML = ICON[k];
       li.append(a);
       return li;
